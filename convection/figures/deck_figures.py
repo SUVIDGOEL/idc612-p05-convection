@@ -86,23 +86,41 @@ def spec2d():
 
 
 def upper():
-    fig, ax = plt.subplots(figsize=(9.4, 5.6))
+    """Slide 4. Left: the averaged temperature profile (over x and time) with the two plate jumps.
+    Right: energy of its sine modes, measured (dots) against the jump model (lines), nothing fitted."""
+    fig, (a0, ax) = plt.subplots(1, 2, figsize=(9.4, 5.6), gridspec_kw={"width_ratios": [0.8, 1.25]})
+    R = {t: np.load(f"{CACHE}/analysis_2d_{t}.npy", allow_pickle=True).item() for t in TAGS}
+    a0.axvline(0, color=INK2, lw=1)
     for t in TAGS:
-        r = np.load(f"{CACHE}/analysis_2d_{t}.npy", allow_pickle=True).item()
-        Em = r["E_mean"]; n = np.arange(1, len(Em) + 1)
+        p = R[t]["prof_T"]; z = np.linspace(0, 1, len(p))
+        a0.plot(p / EPS + z, z, color=COL[t], lw=2.4)
+    r = R["Ra1e12"]; j0, j1 = r["J0"] / EPS, r["J1"] / EPS
+    a0.plot([j0, j1], [0, 1], color=INK2, lw=1.6, ls="--")
+    a0.annotate("", xy=(j0, 0.035), xytext=(0, 0.035), arrowprops=dict(arrowstyle="->", color=INK, lw=2.2))
+    a0.annotate("", xy=(j1, 0.965), xytext=(0, 0.965), arrowprops=dict(arrowstyle="->", color=INK, lw=2.2))
+    a0.text(j0 - 0.02, 0.10, "jump\n0.25 ε", ha="right", fontsize=16, color=INK)
+    a0.text(0.04, 0.84, "jump\n0.75 ε", ha="left", fontsize=16, color=INK)
+    a0.text(0.32, 0.26, "straight\nmiddle", fontsize=15, color=INK2)
+    a0.set_xlim(-0.5, 1.0); a0.set_ylim(0, 1)
+    a0.set_xticks([-0.25, 0.25, 0.75]); a0.set_xticklabels(["−0.25", "0.25", "0.75"]); a0.set_yticks([0, 0.5, 1])
+    a0.set_xlabel("mean θ′ / ε"); a0.set_ylabel("height z")
+    a0.set_title("averaged profile", loc="left", fontsize=18, color=INK)
+    for t in TAGS:
+        r = R[t]; Em = r["E_mean"]; n = np.arange(1, len(Em) + 1)
         k = (n <= 40) & (n % 2 == 0)
-        ax.loglog(n[k], Em[k] / EPS ** 2, "o", ms=8, color=COL[t], mec=BG, mew=1)
+        ax.loglog(n[k], Em[k] / EPS ** 2, "o", ms=7, color=COL[t], mec=BG, mew=1)
         ax.loglog(n[k], r["E_mean_pred"][k] / EPS ** 2, color=COL[t], lw=1.6, alpha=0.8)
         rat = np.sqrt(Em[1:10:2] / r["E_mean_pred"][1:10:2]).mean()
-        print(f"upper {t}: mean amplitude ratio, even n<=10: {rat:.3f}")
-    ax.text(41, 1.0e-4 * 1.6, "10¹⁵", color=COL["Ra1e15"], fontsize=17, va="center")
-    ax.text(41, 0.75e-4, "10¹²", color=COL["Ra1e12"], fontsize=17, va="center")
-    ax.text(43, 8e-7, "10⁹:\nlayers\nresolved", color=COL["Ra1e9"], fontsize=17, va="center")
-    ax.text(2.1, 1.2e-6, "dots: measured\nlines: jump model, no fitted constant", color=INK, fontsize=16)
-    ax.set_xlim(1.8, 75); ax.set_ylim(2.5e-7, 0.12)
-    log_ticks(ax, xs=[2, 4, 10, 20, 40], ys=[1e-6, 1e-5, 1e-4, 1e-3, 1e-2, 1e-1])
-    ax.set_xlabel(r"$n$   (vertical wavenumber $k_z = n\pi$, even $n$)"); ax.set_ylabel("mean-profile mode energy / ε²")
-    fig.savefig(OUT + "deck_upper.png", dpi=150); plt.close(fig)
+        print(f"upper {t}: mean amplitude ratio, even n<=10: {rat:.3f}; J0/eps {r['J0'] / EPS:.3f}, J1/eps {r['J1'] / EPS:.3f}")
+    ax.text(42, 1.6e-4, "10¹⁵", color=COL["Ra1e15"], fontsize=16, va="center")
+    ax.text(42, 0.7e-4, "10¹²", color=COL["Ra1e12"], fontsize=16, va="center")
+    ax.text(42, 1.2e-6, "10⁹", color=COL["Ra1e9"], fontsize=16, va="center")
+    ax.text(2.1, 1.0e-6, "dots: measured\nlines: from the 2 jumps,\nnothing fitted", color=INK, fontsize=15)
+    ax.set_xlim(1.8, 70); ax.set_ylim(2.5e-7, 0.12)
+    log_ticks(ax, xs=[2, 4, 10, 20, 40], ys=[1e-6, 1e-4, 1e-2])
+    ax.set_xlabel(r"sine wave $n$   ($k_z = n\pi$, even $n$)"); ax.set_ylabel("energy Eₙ / ε²")
+    ax.set_title("energy of each sine wave", loc="left", fontsize=18, color=INK)
+    fig.tight_layout(w_pad=2.0); fig.savefig(OUT + "deck_upper.png", dpi=150); plt.close(fig)
 
 
 def sound():
