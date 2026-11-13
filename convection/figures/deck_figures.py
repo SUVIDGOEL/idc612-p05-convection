@@ -91,20 +91,19 @@ def upper():
     fig, (a0, ax) = plt.subplots(1, 2, figsize=(9.4, 5.6), gridspec_kw={"width_ratios": [0.8, 1.25]})
     R = {t: np.load(f"{CACHE}/analysis_2d_{t}.npy", allow_pickle=True).item() for t in TAGS}
     a0.axvline(0, color=INK2, lw=1)
-    for t in TAGS:
-        p = R[t]["prof_T"]; z = np.linspace(0, 1, len(p))
-        a0.plot(p / EPS + z, z, color=COL[t], lw=2.4)
     r = R["Ra1e12"]; j0, j1 = r["J0"] / EPS, r["J1"] / EPS
+    p = r["prof_T"]; z = np.linspace(0, 1, len(p))
+    a0.plot(p / EPS + z, z, color=COL["Ra1e12"], lw=3)
     a0.plot([j0, j1], [0, 1], color=INK2, lw=1.6, ls="--")
     a0.annotate("", xy=(j0, 0.035), xytext=(0, 0.035), arrowprops=dict(arrowstyle="->", color=INK, lw=2.2))
     a0.annotate("", xy=(j1, 0.965), xytext=(0, 0.965), arrowprops=dict(arrowstyle="->", color=INK, lw=2.2))
-    a0.text(j0 - 0.02, 0.10, "jump\n0.25 ε", ha="right", fontsize=16, color=INK)
-    a0.text(0.04, 0.84, "jump\n0.75 ε", ha="left", fontsize=16, color=INK)
+    a0.text(j0 - 0.02, 0.10, f"jump\n{abs(j0):.2f} ε", ha="right", fontsize=16, color=INK)
+    a0.text(0.04, 0.84, f"jump\n{j1:.2f} ε", ha="left", fontsize=16, color=INK)
     a0.text(0.32, 0.26, "straight\nmiddle", fontsize=15, color=INK2)
     a0.set_xlim(-0.5, 1.0); a0.set_ylim(0, 1)
     a0.set_xticks([-0.25, 0.25, 0.75]); a0.set_xticklabels(["−0.25", "0.25", "0.75"]); a0.set_yticks([0, 0.5, 1])
     a0.set_xlabel("mean θ′ / ε"); a0.set_ylabel("height z")
-    a0.set_title("averaged profile", loc="left", fontsize=18, color=INK)
+    a0.set_title("averaged profile, Ra 10¹²", loc="left", fontsize=18, color=INK)
     for t in TAGS:
         r = R[t]; Em = r["E_mean"]; n = np.arange(1, len(Em) + 1)
         k = (n <= 40) & (n % 2 == 0)
