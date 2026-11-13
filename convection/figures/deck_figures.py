@@ -3,6 +3,7 @@
 deck_spec1d.png   1D x-FFT spectra with -5/3 reference
 deck_spec2d.png   2D FFT shell spectra (x FFT x z sine series)
 deck_upper.png    mean-profile (upper-branch) sine modes: measured dots vs jump model, no fitted constant
+deck_entropy.png  entropy and pressure share against Ra (slide 3)
 deck_sound.png    Ra 1e15 frequency-wavenumber map with the ideal-gas sound line (no fit)
 Run from P05_code/:  python -m convection.figures.deck_figures
 """
@@ -121,5 +122,44 @@ def sound():
     print(f"sound: c_eff = {c_eff:.3f}")
 
 
+def entropy_share():
+    """Slide 3: entropy of the spectrum and pressure share against Ra (values from cache/; 1D entropy
+    intervals are the block-bootstrap intervals of results/full_results.md section 3)."""
+    e = np.load(f"{CACHE}/spectral_entropy.npy", allow_pickle=True).item()
+    ps = np.load(f"{CACHE}/pressure_share.npy", allow_pickle=True).item()
+    p3 = np.load(f"{CACHE}/pressure_share_3d.npy", allow_pickle=True).item()["share"]
+    ci1d = {"Ra1e9": (4.30, 4.58), "Ra1e12": (3.56, 3.78), "Ra1e15": (2.64, 2.90)}
+    ra = {"Ra1e9": 1e9, "Ra1e12": 1e12, "Ra1e15": 1e15}
+    fig, ax = plt.subplots(1, 2, figsize=(9.4, 5.6), gridspec_kw={"width_ratios": [1.15, 1]})
+    a = ax[0]
+    s1 = [e[t]["St"].mean() for t in TAGS]
+    s2 = [np.load(f"{CACHE}/analysis_2d_{t}.npy", allow_pickle=True).item()["S_shell_fluct"] for t in TAGS]
+    x = np.array([ra[t] for t in TAGS])
+    a.plot(x, s1, color=INK, lw=1.6, zorder=1); a.plot(x * 1.6, [v[0] for v in s2], color=INK2, lw=1.2, ls="--", zorder=1)
+    for i, t in enumerate(TAGS):
+        lo, hi = ci1d[t]
+        a.errorbar(x[i], s1[i], yerr=[[s1[i] - lo], [hi - s1[i]]], fmt="o", ms=11, color=COL[t], mec=BG, capsize=5, lw=2, zorder=3)
+        a.errorbar(x[i] * 1.6, s2[i][0], yerr=[[s2[i][0] - s2[i][1]], [s2[i][2] - s2[i][0]]], fmt="s", ms=9, mfc=BG, color=COL[t], mew=2.2, capsize=4, lw=1.6, zorder=3)
+    a.set_xscale("log"); a.set_xlim(2e8, 1e16); a.set_ylim(2.4, 4.8)
+    a.xaxis.set_major_locator(FixedLocator([1e9, 1e12, 1e15])); a.xaxis.set_minor_locator(NullLocator())
+    a.set_xticklabels(["10\u2079", "10\u00b9\u00b2", "10\u00b9\u2075"])
+    a.text(3e9, 4.62, "\u25cf 1D spectra", color=INK, fontsize=16); a.text(3e9, 4.42, "\u25a1 2D shells", color=INK2, fontsize=16)
+    a.set_xlabel("Rayleigh number Ra"); a.set_ylabel("entropy S (bits)")
+    a.set_title("entropy falls", loc="left", fontsize=18, color=INK)
+    a = ax[1]
+    labs = ["3D\n10\u2078", "10\u2079", "10\u00b9\u00b2", "10\u00b9\u2075"]
+    vals = [p3] + [ps[t]["pressure_share"] for t in TAGS]
+    cols = ["#c98500"] + [COL[t] for t in TAGS]
+    for i, (v, cl) in enumerate(zip(vals, cols)):
+        a.bar(i, 100 * v[0], width=0.62, color=cl, zorder=2)
+        a.errorbar(i, 100 * v[0], yerr=[[100 * (v[0] - v[1])], [100 * (v[2] - v[0])]], color=INK, capsize=4, lw=1.4, zorder=3)
+        a.text(i, 100 * v[2] + 2.5, f"{100 * v[0]:.0f}%", ha="center", fontsize=17, color=INK, fontweight="bold")
+    a.set_xticks(range(4)); a.set_xticklabels(labs); a.set_ylim(0, 112); a.set_yticks([0, 25, 50, 75, 100])
+    a.grid(axis="x", visible=False)
+    a.set_xlabel("Ra"); a.set_ylabel("pressure share of T (%)")
+    a.set_title("vortex cores take over", loc="left", fontsize=18, color=INK)
+    fig.tight_layout(w_pad=2.5); fig.savefig(OUT + "deck_entropy.png", dpi=150); plt.close(fig)
+
+
 if __name__ == "__main__":
-    spec1d(); spec2d(); upper(); sound()
+    spec1d(); spec2d(); upper(); sound(); entropy_share()
