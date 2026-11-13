@@ -17,13 +17,14 @@ IDC612 project. The only data are four simulation movies: 2D convection at Ra = 
 | 5 | Sound waves | ridge speed 1.93–2.08; ideal-gas theory 2.09; 20% of the T variance at Ra 10¹⁵ | FFT in time of the 2D mode amplitudes → (K, ω) map → ridge ω = cK | `spectrum_2d/sound_waves.py` |
 | 6 | Method checks | slopes recovered within 0.03–0.09; plates within 0.03 px | synthetic movies with known spectra, same layout, colours and H.264 compression | `validation/test_x_spectra_on_synthetic_movies.py`, `validation/test_2d_spectra_on_synthetic_movies.py` |
 
-Full tables with 95% intervals: `results/full_results.md` and `results/summary_tables.md`.
+Short report: `P05_report.pdf`. Full tables with 95% intervals: `results/full_results.md` and `results/summary_tables.md`.
 
 ## Folder layout
 
 ```
 P05_code/
 ├── README.md
+├── P05_report.pdf                      the short written report (5 pages)
 ├── run_all.sh                          every step in order
 ├── requirements.txt
 ├── convection/                         the Python package (run from P05_code/ with python -m)
