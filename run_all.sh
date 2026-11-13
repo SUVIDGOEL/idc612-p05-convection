@@ -49,4 +49,4 @@ py convection.validation.synth_vertical set2
 # 7. figures
 for f in make_slide_figs make_figs_step3 make_f5_v2 make_figs2 make_fig_whyx make_fig_row_fft make_figs3d \
          make_fig_break15 make_fig_colourbar make_fig_formulas make_fig_jump make_fig_k41 make_fig_final \
-         make_figs4 make_deck_figs; do py convection.figures.$f; done
+         make_figs4 make_deck_figs make_deck_math; do py convection.figures.$f; done
