@@ -38,7 +38,7 @@ def log_ticks(ax, xs=None, ys=None):
 
 def spec1d():
     """1D x-FFT, mean over rows and frames (same data and fit as FINAL_RESULTS section 1)."""
-    fig, a = plt.subplots(figsize=(8, 6.1))
+    fig, a = plt.subplots(figsize=(9.4, 5.6))
     floor = {"Ra1e9": 177, "Ra1e12": 873, "Ra1e15": 155}
     a.axvspan(10, 30, color=INK, alpha=0.06, lw=0)
     for t in TAGS:
@@ -61,7 +61,7 @@ def spec1d():
 
 def spec2d():
     """2D FFT shells (x FFT x z sine series), fluctuations only (mean profile removed)."""
-    fig, a = plt.subplots(figsize=(8, 6.1))
+    fig, a = plt.subplots(figsize=(9.4, 5.6))
     a.axvspan(5, 15, color=INK, alpha=0.06, lw=0)
     sl = {"Ra1e9": "−1.27", "Ra1e12": "−1.62", "Ra1e15": "−2.27"}
     vmax = {"Ra1e9": 40, "Ra1e12": 40, "Ra1e15": 100}
@@ -85,7 +85,7 @@ def spec2d():
 
 
 def upper():
-    fig, ax = plt.subplots(figsize=(8, 6.1))
+    fig, ax = plt.subplots(figsize=(9.4, 5.6))
     for t in TAGS:
         r = np.load(f"{CACHE}/analysis_2d_{t}.npy", allow_pickle=True).item()
         Em = r["E_mean"]; n = np.arange(1, len(Em) + 1)
@@ -107,7 +107,7 @@ def upper():
 def sound():
     f, kb, S = SW.k_omega_spectrum("Ra1e15", "cT")
     Sn = S / np.maximum(S.sum(1, keepdims=True), 1e-300)
-    fig, a = plt.subplots(figsize=(8, 6.1))
+    fig, a = plt.subplots(figsize=(9.4, 5.6))
     a.pcolormesh(kb, f[1:], np.log10(Sn[:, 1:].T * f[1:, None] + 1e-30), vmin=-5, vmax=-0.5,
                  shading="nearest", cmap="Blues", rasterized=True)
     zg = np.linspace(0, 1, 401); cs = np.sqrt(0.3 * (1 - 0.5 * zg) / (0.5 * 0.1))
