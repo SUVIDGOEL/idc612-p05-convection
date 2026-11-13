@@ -1,0 +1,8 @@
+# large or generated
+cache/
+data/
+synth/*.mp4
+logs/
+logs_guard_*.txt
+__pycache__/
+*.pyc

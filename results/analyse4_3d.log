@@ -1,0 +1,156 @@
+
+=== 3D Ra1e8 wall_xz: 1001 frames, grid 181 x 541, correlation time 31 frames -> 16 batches ===
+[upper branch] jumps J0 (bottom) = -0.0252 = -0.25 eps, J1 (top) = +0.0581 = +0.58 eps (Boussinesq: -0.5, +0.5 eps)
+   even-n slope n<= 20: -3.652 [-3.719, -3.585]   odd-n slope: -2.802 [-2.883, -2.720]   (theory -2)
+   amplitude / jump-model prediction: even +0.837 [+0.807, +0.866], odd +0.810 [+0.770, +0.850]
+   amplitude / prediction, n = 1..12: 1.35 1.10 1.11 0.99 0.83 0.83 0.49 0.70 0.27 0.56 0.22 0.45
+   even/odd energy (n<=20): +1.273 [+1.229, +1.316]  predicted from jumps 2.05
+   BL thickness from roll-off fit: bottom 0.0346, top 0.0293 (pixel = 0.0055); rms peak at 0.0166 / 0.0608; slope bound 0.0193 / 0.1020
+   wall gradient / eps (= Nu if resolved; lower bound otherwise): bottom 13.1, top 5.7
+   fraction of theta' variance in the mean profile: +0.939 [+0.933, +0.945]
+[lower branch = fluctuations]
+   K/pi   3-8  : shell -1.193 [-1.342, -1.043] | 1D x -1.530 [-1.786, -1.275] | 1D z -1.572 [-1.686, -1.459]
+   K/pi   5-15 : shell -2.050 [-2.187, -1.914] | 1D x -2.436 [-2.573, -2.300] | 1D z -2.423 [-2.526, -2.321]
+   K/pi  10-30 : shell -3.487 [-3.546, -3.429] | 1D x -3.624 [-3.704, -3.544] | 1D z -3.319 [-3.411, -3.227]
+   z-slope variants K/pi 3-8: DCT -1.218 [-1.348, -1.088] 
+   z-slope variants K/pi 5-15: DCT -1.721 [-1.825, -1.618] 
+   old convention x-slope k=10-30 (all rows, new grid): -2.436 [-2.573, -2.300]
+   isotropy E_z/E_x at k/pi 1-3: +1.421 [+1.184, +1.657]
+   isotropy E_z/E_x at k/pi 3-10: +1.163 [+1.076, +1.249]
+   isotropy E_z/E_x at k/pi 10-40: +1.428 [+1.335, +1.520]
+   per-mode energy, vertical sector / horizontal sector, K/pi 2-5: +1.196 [+0.862, +1.531]
+   per-mode energy, vertical sector / horizontal sector, K/pi 5-15: +1.176 [+0.967, +1.384]
+   per-mode energy, vertical sector / horizontal sector, K/pi 15-40: +1.196 [+1.061, +1.330]
+[entropy, bits, K/pi 1-75] 2D shells, fluctuations +3.831 [+3.784, +3.878]; with mean-profile modes +2.087 [+2.068, +2.107]; 1D z +3.253 [+3.152, +3.354]  (flat = 6.23)
+[T-rho]  coherence K/pi 1-5: -0.716 [-0.746, -0.687]  K/pi 5-15: -0.694 [-0.721, -0.666]  K/pi 15-50: -0.419 [-0.439, -0.399]
+   rho shell slopes 3-8: -1.039 [-1.211, -0.866]  5-15: -1.681 [-1.805, -1.557]
+[profiles] rms theta: bottom 0.0053 mid 0.0064 top 0.0130; skewness: bottom -0.13 mid -1.96 top -1.18; flatness: 4.9 / 9.7 / 4.0
+   up-down asymmetry (0 = Boussinesq symmetric): mean profile 1.33, rms profile 0.62
+[PDFs by height band, bottom -> top]  T: skew -0.02 -1.74 -1.97 -1.85 -1.07 | flat 4.3 10.4 9.6 7.2 4.0
+   T exponential tail rates (cold side, hot side), mid band: 1.08, nan (Gaussian tails: steeper and growing)
+   R: skew +0.03 +1.97 +2.10 +1.70 +1.22 | flat 4.9 11.3 10.9 6.9 4.6
+[structure functions, T] zeta2 (S2 ~ r^zeta2, r 0.015-0.1): x +1.433 [+1.416, +1.450], z +1.434 [+1.422, +1.446] (OC 2/3, BO 2/5) ; flatness at smallest/largest r (x): 21.2 / 7.1
+   ESS zeta_p/zeta_3, p=1..6 (x): 0.36 0.70 1.00 1.28 1.55 1.79  (K41: 0.33 0.67 1 1.33 1.67 2)
+[structure functions, R] zeta2 (S2 ~ r^zeta2, r 0.015-0.1): x +1.199 [+1.179, +1.219], z +1.086 [+1.062, +1.111] (OC 2/3, BO 2/5) ; flatness at smallest/largest r (x): 17.1 / 5.8
+   ESS zeta_p/zeta_3, p=1..6 (x): 0.40 0.70 1.00 1.25 1.41 1.49  (K41: 0.33 0.67 1 1.33 1.67 2)
+[time, real] decorrelation time (1/e): tau(K/pi=3) ~ 0.849, tau(K/pi=30) ~ 0.134; tau ~ K^-0.80 (K/pi 3-30)
+[time, env] decorrelation time (1/e): tau(K/pi=3) ~ 0.964, tau(K/pi=30) ~ 0.138; tau ~ K^-0.85 (K/pi 3-30)
+   apparent horizontal drift speed from phase rotation (m 1-20, n 1-10): -0.019 (length/time)
+   mean-profile modes n=1,2: tau = 0.219, 0.186 (nan = longer than 3.0)
+
+=== 3D Ra1e8 wall_yz: 1001 frames, grid 180 x 542, correlation time 39 frames -> 12 batches ===
+[upper branch] jumps J0 (bottom) = -0.0233 = -0.23 eps, J1 (top) = +0.0598 = +0.60 eps (Boussinesq: -0.5, +0.5 eps)
+   even-n slope n<= 20: -3.800 [-3.909, -3.691]   odd-n slope: -2.983 [-3.050, -2.916]   (theory -2)
+   amplitude / jump-model prediction: even +0.840 [+0.822, +0.859], odd +0.838 [+0.810, +0.866]
+   amplitude / prediction, n = 1..12: 1.37 1.16 1.14 1.00 0.90 0.85 0.52 0.67 0.26 0.53 0.18 0.40
+   even/odd energy (n<=20): +1.072 [+1.023, +1.121]  predicted from jumps 1.66
+   BL thickness from roll-off fit: bottom 0.0369, top 0.0319 (pixel = 0.0056); rms peak at 0.0222 / 0.0111; slope bound 0.0201 / 0.0340
+   wall gradient / eps (= Nu if resolved; lower bound otherwise): bottom 11.6, top 17.6
+   fraction of theta' variance in the mean profile: +0.964 [+0.957, +0.971]
+[lower branch = fluctuations]
+   K/pi   3-8  : shell -0.736 [-1.090, -0.381] | 1D x -1.535 [-1.683, -1.387] | 1D z -1.350 [-1.568, -1.132]
+   K/pi   5-15 : shell -1.932 [-2.077, -1.787] | 1D x -2.186 [-2.411, -1.961] | 1D z -2.671 [-2.785, -2.558]
+   K/pi  10-30 : shell -2.560 [-2.717, -2.403] | 1D x -3.489 [-3.658, -3.320] | 1D z -1.874 [-2.063, -1.685]
+   z-slope variants K/pi 3-8: DCT -0.983 [-1.182, -0.783] 
+   z-slope variants K/pi 5-15: DCT -1.268 [-1.493, -1.042] 
+   old convention x-slope k=10-30 (all rows, new grid): -2.186 [-2.411, -1.961]
+   isotropy E_z/E_x at k/pi 1-3: +1.040 [+0.886, +1.194]
+   isotropy E_z/E_x at k/pi 3-10: +1.162 [+1.013, +1.310]
+   isotropy E_z/E_x at k/pi 10-40: +2.772 [+2.480, +3.064]
+   per-mode energy, vertical sector / horizontal sector, K/pi 2-5: +1.484 [+0.770, +2.198]
+   per-mode energy, vertical sector / horizontal sector, K/pi 5-15: +1.063 [+0.830, +1.296]
+   per-mode energy, vertical sector / horizontal sector, K/pi 15-40: +1.824 [+1.576, +2.072]
+[entropy, bits, K/pi 1-75] 2D shells, fluctuations +4.335 [+4.187, +4.483]; with mean-profile modes +1.984 [+1.954, +2.015]; 1D z +3.777 [+3.593, +3.960]  (flat = 6.23)
+[T-rho]  coherence K/pi 1-5: -0.729 [-0.776, -0.683]  K/pi 5-15: -0.742 [-0.785, -0.699]  K/pi 15-50: -0.475 [-0.495, -0.455]
+   rho shell slopes 3-8: -1.192 [-1.395, -0.989]  5-15: -1.774 [-1.916, -1.632]
+[profiles] rms theta: bottom 0.0044 mid 0.0044 top 0.0108; skewness: bottom -0.08 mid -2.81 top -1.69; flatness: 4.8 / 16.8 / 6.0
+   up-down asymmetry (0 = Boussinesq symmetric): mean profile 1.39, rms profile 0.68
+[PDFs by height band, bottom -> top]  T: skew +0.13 -1.51 -2.83 -2.82 -1.16 | flat 4.4 10.0 17.0 13.8 5.0
+   T exponential tail rates (cold side, hot side), mid band: 0.65, nan (Gaussian tails: steeper and growing)
+   R: skew +4.89 +0.25 +2.06 +2.82 +1.78 | flat 39.8 8.3 12.0 14.4 6.7
+[structure functions, T] zeta2 (S2 ~ r^zeta2, r 0.015-0.1): x +1.365 [+1.308, +1.422], z +1.471 [+1.432, +1.510] (OC 2/3, BO 2/5) ; flatness at smallest/largest r (x): 40.5 / 12.0
+   ESS zeta_p/zeta_3, p=1..6 (x): 0.38 0.71 1.00 1.27 1.51 1.73  (K41: 0.33 0.67 1 1.33 1.67 2)
+[structure functions, R] zeta2 (S2 ~ r^zeta2, r 0.015-0.1): x +1.200 [+1.148, +1.253], z +1.162 [+1.095, +1.230] (OC 2/3, BO 2/5) ; flatness at smallest/largest r (x): 88.8 / 10.8
+   ESS zeta_p/zeta_3, p=1..6 (x): 0.38 0.72 1.00 1.17 1.26 1.31  (K41: 0.33 0.67 1 1.33 1.67 2)
+[time, real] decorrelation time (1/e): tau(K/pi=3) ~ 0.807, tau(K/pi=30) ~ 0.159; tau ~ K^-0.71 (K/pi 3-30)
+[time, env] decorrelation time (1/e): tau(K/pi=3) ~ 0.888, tau(K/pi=30) ~ 0.167; tau ~ K^-0.74 (K/pi 3-30)
+   apparent horizontal drift speed from phase rotation (m 1-20, n 1-10): -0.003 (length/time)
+   mean-profile modes n=1,2: tau = 0.209, 0.179 (nan = longer than 3.0)
+
+=== 3D Ra1e8 wall_back1: 1001 frames, grid 182 x 541, correlation time 30 frames -> 16 batches ===
+[upper branch] jumps J0 (bottom) = -0.0249 = -0.25 eps, J1 (top) = +0.0623 = +0.62 eps (Boussinesq: -0.5, +0.5 eps)
+   even-n slope n<= 20: -3.009 [-3.064, -2.953]   odd-n slope: -3.223 [-3.365, -3.081]   (theory -2)
+   amplitude / jump-model prediction: even +0.884 [+0.853, +0.915], odd +0.914 [+0.869, +0.959]
+   amplitude / prediction, n = 1..12: 1.20 1.07 1.06 0.99 0.93 0.88 0.74 0.79 0.64 0.69 0.49 0.61
+   even/odd energy (n<=20): +1.294 [+1.250, +1.338]  predicted from jumps 1.74
+   BL thickness from roll-off fit: bottom 0.0166, top 0.0242 (pixel = 0.0055); rms peak at 0.0220 / 0.0440; slope bound 0.0306 / 0.0359
+   wall gradient / eps (= Nu if resolved; lower bound otherwise): bottom 8.1, top 17.3
+   fraction of theta' variance in the mean profile: +0.943 [+0.937, +0.948]
+[lower branch = fluctuations]
+   K/pi   3-8  : shell -1.131 [-1.282, -0.979] | 1D x -1.528 [-1.780, -1.277] | 1D z -1.447 [-1.552, -1.342]
+   K/pi   5-15 : shell -1.873 [-2.002, -1.744] | 1D x -2.430 [-2.551, -2.309] | 1D z -2.159 [-2.262, -2.056]
+   K/pi  10-30 : shell -3.490 [-3.550, -3.430] | 1D x -3.720 [-3.795, -3.645] | 1D z -3.373 [-3.457, -3.289]
+   z-slope variants K/pi 3-8: DCT -1.406 [-1.550, -1.262] 
+   z-slope variants K/pi 5-15: DCT -1.979 [-2.068, -1.891] 
+   old convention x-slope k=10-30 (all rows, new grid): -2.430 [-2.551, -2.309]
+   isotropy E_z/E_x at k/pi 1-3: +1.368 [+1.127, +1.610]
+   isotropy E_z/E_x at k/pi 3-10: +1.200 [+1.115, +1.285]
+   isotropy E_z/E_x at k/pi 10-40: +1.680 [+1.549, +1.811]
+   per-mode energy, vertical sector / horizontal sector, K/pi 2-5: +1.240 [+0.854, +1.625]
+   per-mode energy, vertical sector / horizontal sector, K/pi 5-15: +1.357 [+1.111, +1.603]
+   per-mode energy, vertical sector / horizontal sector, K/pi 15-40: +1.722 [+1.514, +1.931]
+[entropy, bits, K/pi 1-75] 2D shells, fluctuations +3.889 [+3.846, +3.931]; with mean-profile modes +2.195 [+2.175, +2.216]; 1D z +3.346 [+3.250, +3.442]  (flat = 6.23)
+[T-rho]  coherence K/pi 1-5: -0.647 [-0.678, -0.616]  K/pi 5-15: -0.678 [-0.705, -0.652]  K/pi 15-50: -0.432 [-0.454, -0.410]
+   rho shell slopes 3-8: -1.118 [-1.334, -0.901]  5-15: -1.626 [-1.750, -1.502]
+[profiles] rms theta: bottom 0.0055 mid 0.0063 top 0.0127; skewness: bottom -0.05 mid -1.97 top -1.31; flatness: 4.4 / 9.9 / 4.3
+   up-down asymmetry (0 = Boussinesq symmetric): mean profile 1.32, rms profile 0.60
+[PDFs by height band, bottom -> top]  T: skew -0.00 -1.67 -1.98 -1.87 -1.12 | flat 4.0 10.3 9.9 7.5 4.0
+   T exponential tail rates (cold side, hot side), mid band: 1.09, nan (Gaussian tails: steeper and growing)
+   R: skew +0.47 +1.96 +2.18 +1.66 +1.11 | flat 5.5 11.4 11.8 7.0 4.3
+[structure functions, T] zeta2 (S2 ~ r^zeta2, r 0.015-0.1): x +1.432 [+1.416, +1.447], z +1.438 [+1.427, +1.449] (OC 2/3, BO 2/5) ; flatness at smallest/largest r (x): 16.7 / 7.2
+   ESS zeta_p/zeta_3, p=1..6 (x): 0.36 0.70 1.00 1.29 1.56 1.82  (K41: 0.33 0.67 1 1.33 1.67 2)
+[structure functions, R] zeta2 (S2 ~ r^zeta2, r 0.015-0.1): x +1.245 [+1.226, +1.265], z +1.177 [+1.156, +1.198] (OC 2/3, BO 2/5) ; flatness at smallest/largest r (x): 17.9 / 5.9
+   ESS zeta_p/zeta_3, p=1..6 (x): 0.39 0.70 1.00 1.24 1.42 1.54  (K41: 0.33 0.67 1 1.33 1.67 2)
+[time, real] decorrelation time (1/e): tau(K/pi=3) ~ 0.869, tau(K/pi=30) ~ 0.137; tau ~ K^-0.75 (K/pi 3-30)
+[time, env] decorrelation time (1/e): tau(K/pi=3) ~ 0.915, tau(K/pi=30) ~ 0.140; tau ~ K^-0.76 (K/pi 3-30)
+   apparent horizontal drift speed from phase rotation (m 1-20, n 1-10): -0.020 (length/time)
+   mean-profile modes n=1,2: tau = 0.226, 0.186 (nan = longer than 3.0)
+
+=== 3D Ra1e8 wall_back2: 1001 frames, grid 182 x 542, correlation time 50 frames -> 10 batches ===
+[upper branch] jumps J0 (bottom) = -0.0231 = -0.23 eps, J1 (top) = +0.0675 = +0.67 eps (Boussinesq: -0.5, +0.5 eps)
+   even-n slope n<= 20: -3.130 [-3.200, -3.061]   odd-n slope: -3.262 [-3.454, -3.071]   (theory -2)
+   amplitude / jump-model prediction: even +0.874 [+0.858, +0.890], odd +0.893 [+0.856, +0.930]
+   amplitude / prediction, n = 1..12: 1.14 1.08 1.02 0.97 0.93 0.89 0.76 0.76 0.61 0.67 0.49 0.58
+   even/odd energy (n<=20): +1.106 [+1.054, +1.157]  predicted from jumps 1.34
+   BL thickness from roll-off fit: bottom 0.0170, top 0.0261 (pixel = 0.0055); rms peak at 0.0220 / 0.0440; slope bound 0.0328 / 0.0379
+   wall gradient / eps (= Nu if resolved; lower bound otherwise): bottom 7.0, top 17.8
+   fraction of theta' variance in the mean profile: +0.968 [+0.961, +0.975]
+[lower branch = fluctuations]
+   K/pi   3-8  : shell -0.719 [-1.049, -0.388] | 1D x -1.424 [-1.594, -1.254] | 1D z -1.200 [-1.404, -0.995]
+   K/pi   5-15 : shell -1.644 [-1.807, -1.482] | 1D x -2.212 [-2.443, -1.982] | 1D z -2.185 [-2.294, -2.076]
+   K/pi  10-30 : shell -3.494 [-3.655, -3.333] | 1D x -3.633 [-3.855, -3.412] | 1D z -3.496 [-3.644, -3.347]
+   z-slope variants K/pi 3-8: DCT -1.368 [-1.588, -1.149] 
+   z-slope variants K/pi 5-15: DCT -1.830 [-2.002, -1.659] 
+   old convention x-slope k=10-30 (all rows, new grid): -2.212 [-2.443, -1.982]
+   isotropy E_z/E_x at k/pi 1-3: +0.982 [+0.840, +1.123]
+   isotropy E_z/E_x at k/pi 3-10: +1.236 [+1.067, +1.405]
+   isotropy E_z/E_x at k/pi 10-40: +1.406 [+1.183, +1.628]
+   per-mode energy, vertical sector / horizontal sector, K/pi 2-5: +1.657 [+0.740, +2.574]
+   per-mode energy, vertical sector / horizontal sector, K/pi 5-15: +1.411 [+1.050, +1.772]
+   per-mode energy, vertical sector / horizontal sector, K/pi 15-40: +1.309 [+0.962, +1.655]
+[entropy, bits, K/pi 1-75] 2D shells, fluctuations +3.979 [+3.882, +4.077]; with mean-profile modes +2.093 [+2.055, +2.131]; 1D z +3.439 [+3.284, +3.595]  (flat = 6.23)
+[T-rho]  coherence K/pi 1-5: -0.745 [-0.798, -0.692]  K/pi 5-15: -0.785 [-0.824, -0.746]  K/pi 15-50: -0.480 [-0.501, -0.459]
+   rho shell slopes 3-8: -1.116 [-1.325, -0.908]  5-15: -1.845 [-1.993, -1.698]
+[profiles] rms theta: bottom 0.0046 mid 0.0044 top 0.0104; skewness: bottom -0.04 mid -2.76 top -1.91; flatness: 4.3 / 16.6 / 6.8
+   up-down asymmetry (0 = Boussinesq symmetric): mean profile 1.38, rms profile 0.61
+[PDFs by height band, bottom -> top]  T: skew -0.01 -1.40 -2.76 -2.91 -1.67 | flat 4.0 9.6 16.7 14.8 6.0
+   T exponential tail rates (cold side, hot side), mid band: 0.67, nan (Gaussian tails: steeper and growing)
+   R: skew +2.95 +0.27 +2.19 +2.93 +1.82 | flat 27.0 7.8 13.5 16.0 6.9
+[structure functions, T] zeta2 (S2 ~ r^zeta2, r 0.015-0.1): x +1.381 [+1.321, +1.442], z +1.463 [+1.420, +1.506] (OC 2/3, BO 2/5) ; flatness at smallest/largest r (x): 57.1 / 12.8
+   ESS zeta_p/zeta_3, p=1..6 (x): 0.38 0.71 1.00 1.27 1.52 1.74  (K41: 0.33 0.67 1 1.33 1.67 2)
+[structure functions, R] zeta2 (S2 ~ r^zeta2, r 0.015-0.1): x +1.269 [+1.220, +1.319], z +1.192 [+1.123, +1.261] (OC 2/3, BO 2/5) ; flatness at smallest/largest r (x): 27.8 / 11.7
+   ESS zeta_p/zeta_3, p=1..6 (x): 0.35 0.68 1.00 1.26 1.46 1.59  (K41: 0.33 0.67 1 1.33 1.67 2)
+[time, real] decorrelation time (1/e): tau(K/pi=3) ~ 0.816, tau(K/pi=30) ~ 0.161; tau ~ K^-0.66 (K/pi 3-30)
+[time, env] decorrelation time (1/e): tau(K/pi=3) ~ 0.910, tau(K/pi=30) ~ 0.166; tau ~ K^-0.69 (K/pi 3-30)
+   apparent horizontal drift speed from phase rotation (m 1-20, n 1-10): -0.006 (length/time)
+   mean-profile modes n=1,2: tau = 0.232, 0.179 (nan = longer than 3.0)
