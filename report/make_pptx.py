@@ -116,7 +116,7 @@ text(s, 0.65, 1.15, 5.7, 2.0, "Spectra of compressible convection, read from mov
 text(s, 0.65, 3.25, 5.5, 0.9, "Four simulation movies: 2D at Ra 10⁹, 10¹², 10¹⁵ and 3D at Ra 10⁸. Ideal gas with γ = 1.3, D = 0.5, ε = 0.1.", size=15, color=SUB)
 rect(s, 0.65, 4.3, 5.2, 0.02, RGBColor(0x34, 0x45, 0x6B))
 text(s, 0.65, 4.42, 5, 0.3, "TEAM", size=12, color=ORANGE, bold=True)
-text(s, 0.65, 4.75, 5.4, 1.5, ["Suvid Goel", "[Teammate 2]", "[Teammate 3]"], size=20, color=LIGHT, bold=True, spacing=1.15)
+text(s, 0.65, 4.75, 5.4, 1.5, ["Suvid Goel", "Abhay Tripathi", "Vibhor Srivastava"], size=20, color=LIGHT, bold=True, spacing=1.15)
 text(s, 0.65, 6.5, 5, 0.35, "14 November 2026", size=13, color=SUB)
 picture(s, FRAME, 6.55, 1.25, w=6.2)
 text(s, 6.55, 4.92, 6.2, 0.7, "One frame of the Ra 10¹⁵ movie: temperature (top) and density (bottom). Every number in this talk comes from these pixels.", size=13, color=SUB)
