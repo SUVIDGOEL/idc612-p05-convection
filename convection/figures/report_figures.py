@@ -1,6 +1,8 @@
 """Figures for the written report (figures/report/*.png), drawn from cached results only.
 
 rep_mirror.png      one real temperature frame (Ra 1e12) and the mirror trick applied to one of its columns
+rep_sound_map.png   large sound-ridge map (report section 3.5)
+rep_sound_side.png  sound speed against height and sound share
 rep_sound.png       sound waves: frequency-wavenumber map with ridge points, sound speed against height, sound share
 rep_validation.png  synthetic movies with known slopes: recovered against true slope
 deck_*.png          the slide figures again, on a white background
@@ -105,6 +107,53 @@ def sound():
     print(f"sound: theory c = {c_eff:.3f}; c_s from {cs[0]:.2f} (bottom) to {cs[-1]:.2f} (top)")
 
 
+def sound_big():
+    """Large ridge map for the report: measured ridge peaks, fitted speed and the ideal-gas speed (no fit)."""
+    f, kb, S = SW.k_omega_spectrum("Ra1e15", "cT")
+    Sn = S / np.maximum(S.sum(1, keepdims=True), 1e-300)
+    zg = np.linspace(0, 1, 401); cs = np.sqrt((G - 1) * (1 - D * zg) / (D * EPS)); c_th = 1 / np.mean(1 / cs)
+    c_fit = np.load(f"{CACHE}/sound_ridge.npy", allow_pickle=True).item()[("Ra1e15", "cT")][0]
+    fr = SW.ridge(f, kb, S); ok = np.isfinite(fr) & (kb >= 4) & (kb <= 60)
+    fig, a = plt.subplots(figsize=(12.6, 6.6))
+    im = a.pcolormesh(kb, f[1:], np.log10(Sn[:, 1:].T * f[1:, None] + 1e-30), vmin=-5, vmax=-0.5,
+                      shading="nearest", cmap="Blues", rasterized=True)
+    cb = fig.colorbar(im, ax=a, fraction=0.03, pad=0.015); cb.set_label("log₁₀ power (normalised per ring)", fontsize=15)
+    a.plot(kb, c_th * kb / 2, color=ACC, lw=3, ls="--", label=f"ideal-gas theory:  c = {c_th:.2f}  (no fit)")
+    a.plot(kb, c_fit * kb / 2, color="#F2A65A", lw=2.2, label=f"line through the ridge:  c = {c_fit:.2f}")
+    a.plot(kb[ok], fr[ok], "o", ms=6.5, color="#F2A65A", mec=INK, mew=0.8, label="measured ridge peak in each ring")
+    a.set_xlim(1, 60); a.set_ylim(0, 34); a.grid(False)
+    a.set_xlabel("K/π   (size of the 2D wave)", fontsize=18); a.set_ylabel("frequency f   (1 / time unit)", fontsize=18)
+    a.tick_params(labelsize=16)
+    a.legend(loc="upper left", fontsize=15, framealpha=0.95)
+    a.text(0.985, 0.04, "Ra 10¹⁵, temperature panel\nslow plumes and swirls: bottom\nsound waves: the straight ridge",
+           transform=a.transAxes, ha="right", va="bottom", fontsize=14, color=INK,
+           bbox=dict(facecolor="white", edgecolor="none", alpha=0.9, pad=6))
+    a.set_title(f"Sound waves: measured {c_fit:.2f}–2.08 against ideal-gas {c_th:.2f}", loc="left", fontsize=19, color=INK)
+    fig.tight_layout(); fig.savefig(OUT + "rep_sound_map.png", dpi=170); plt.close(fig)
+
+
+def sound_side():
+    fig, ax = plt.subplots(1, 2, figsize=(11.5, 4.3))
+    zg = np.linspace(0, 1, 401); cs = np.sqrt((G - 1) * (1 - D * zg) / (D * EPS)); c_eff = 1 / np.mean(1 / cs)
+    b = ax[0]
+    b.plot(cs, zg, color=INK, lw=2.6)
+    b.axvspan(1.93, 2.08, color="#F2A65A", alpha=0.35, lw=0)
+    b.axvline(c_eff, color=ACC, lw=2.2, ls="--")
+    b.text(1.36, 0.06, "measured\n1.93–2.08", fontsize=14, color=INK)
+    b.text(c_eff + 0.03, 0.9, f"average {c_eff:.2f}", color=ACC, fontsize=14)
+    b.set_xlim(1.3, 2.6); b.set_xlabel(r"ideal-gas sound speed $c_s(z)$"); b.set_ylabel("height z")
+    b.set_title("faster in the hot bottom", loc="left", fontsize=16, color=INK); panel_label(b, "b")
+    c = ax[1]
+    sp = np.load(f"{CACHE}/sound_share.npy", allow_pickle=True).item()
+    for t in DF.TAGS:
+        s_ = sp[(t, "cT")]; k = (s_["kb"] >= 2) & (s_["kb"] <= 40)
+        y = np.convolve(s_["acoustic"], [0.5, 0.5], "same")
+        c.semilogy(s_["kb"][k], 100 * y[k], color=COL[t], lw=2.6, label=DF.LAB[t])
+    c.set_xlabel("K/π"); c.set_ylabel("% of T variance in sound"); c.legend(fontsize=14, frameon=False, loc="lower right")
+    c.set_title("sound grows with Ra", loc="left", fontsize=16, color=INK); panel_label(c, "c")
+    fig.tight_layout(w_pad=3); fig.savefig(OUT + "rep_sound_side.png", dpi=170); plt.close(fig)
+
+
 def validation():
     fig, ax = plt.subplots(1, 2, figsize=(11.0, 4.4))
     a = ax[0]
@@ -137,4 +186,4 @@ def slide_figures_white():
 
 
 if __name__ == "__main__":
-    mirror(); sound(); validation(); slide_figures_white()
+    mirror(); sound(); sound_big(); sound_side(); validation(); slide_figures_white()
