@@ -24,7 +24,8 @@ Short report: `P05_report.pdf`. Full tables with 95% intervals: `results/full_re
 ```
 P05_code/
 ├── README.md
-├── P05_report.pdf                      the short written report (5 pages)
+├── P05_report.pdf                      the written report (8 pages, figures and tables)
+├── report/                             LaTeX source of the report, PowerPoint builder, speaker notes
 ├── run_all.sh                          every step in order
 ├── requirements.txt
 ├── convection/                         the Python package (run from P05_code/ with python -m)

@@ -6,3 +6,8 @@ logs/
 logs_guard_*.txt
 __pycache__/
 *.pyc
+report/preview/
+report/*.aux
+report/*.log
+report/*.out
+report/build.log
