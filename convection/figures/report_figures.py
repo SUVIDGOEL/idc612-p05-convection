@@ -114,7 +114,7 @@ def sound_big():
     zg = np.linspace(0, 1, 401); cs = np.sqrt((G - 1) * (1 - D * zg) / (D * EPS)); c_th = 1 / np.mean(1 / cs)
     c_fit = np.load(f"{CACHE}/sound_ridge.npy", allow_pickle=True).item()[("Ra1e15", "cT")][0]
     fr = SW.ridge(f, kb, S); ok = np.isfinite(fr) & (kb >= 4) & (kb <= 60)
-    fig, a = plt.subplots(figsize=(12.6, 9.6))
+    fig, a = plt.subplots(figsize=(12.6, 8.8))
     im = a.pcolormesh(kb, f[1:], np.log10(Sn[:, 1:].T * f[1:, None] + 1e-30), vmin=-5, vmax=-0.5,
                       shading="nearest", cmap="Blues", rasterized=True)
     cb = fig.colorbar(im, ax=a, fraction=0.03, pad=0.015); cb.set_label("log₁₀ power (normalised per ring)", fontsize=15)
