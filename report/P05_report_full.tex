@@ -22,10 +22,12 @@
 
 \titleformat{\section}{\sffamily\Large\bfseries\color{ink}}{\color{accent}\thesection}{0.6em}{}
 \titleformat{\subsection}{\sffamily\large\bfseries\color{ink}}{\color{accent}\thesubsection}{0.5em}{}
-\titlespacing*{\section}{0pt}{1.3em}{0.5em}
-\titlespacing*{\subsection}{0pt}{1.0em}{0.35em}
+\titlespacing*{\section}{0pt}{0.8em}{0.3em}
+\titlespacing*{\subsection}{0pt}{0.55em}{0.2em}
 \captionsetup{font={small,sf},labelfont={bf,color=accent},labelsep=period,margin=0.5cm}
-\setlength{\parskip}{0.35em}
+\setlength{\parskip}{0.25em}
+\setlength{\abovedisplayskip}{5pt}\setlength{\belowdisplayskip}{5pt}
+\setlength{\abovecaptionskip}{4pt}\setlength{\intextsep}{8pt}
 \setlength{\parindent}{0pt}
 \pagestyle{fancy}\fancyhf{}
 \renewcommand{\headrulewidth}{0.4pt}
@@ -39,6 +41,7 @@
 \newtcbox{\stat}[1][]{enhanced,colback=white,colframe=ink,boxrule=0.6pt,arc=3pt,nobeforeafter,valign=top}
 
 \begin{document}
+\setlength{\abovedisplayskip}{5pt}\setlength{\belowdisplayskip}{5pt}\setlength{\abovedisplayshortskip}{3pt}\setlength{\belowdisplayshortskip}{3pt}
 \thispagestyle{empty}
 \begin{tcolorbox}[enhanced,colback=ink,colframe=ink,arc=4pt,left=16pt,right=16pt,top=14pt,bottom=14pt]
 {\sffamily\color{orange}\small\bfseries IDC612 · MATH \& COMPUTATION USING PYTHON · PROJECT P05}\\[6pt]
@@ -83,10 +86,12 @@ and then mirror each column above the top plate with a sign flip, $\theta'(2-z)=
 \[ \theta'(x,z) = \sum_{m,n} \hat\theta(m,n)\, e^{ik_x x}\sin(n\pi z), \qquad k_x=\frac{2\pi m}{L},\quad k_z=n\pi . \]
 All cosine parts vanish because the mirrored column is antisymmetric (Fig.~\ref{fig:mirror}). FFT in $x$ times the sine series in $z$ gives every 2D wave. Removing the mean profile ($m=0$) and summing the energy in rings of $K=\sqrt{k_x^2+k_z^2}$ gives the 2D spectrum $E(K)$.
 
-\begin{figure}[t]
-\centering\includegraphics[width=0.86\textwidth]{../figures/report/rep_mirror.png}
+\begin{figure}[H]
+\centering\includegraphics[width=0.9\textwidth]{../figures/report/rep_mirror.png}
 \caption{The mirror trick on real data. (a) One frame of the $\mathrm{Ra}=10^{12}$ movie. (b) One column after removing the background line: $\theta'$ is zero at both plates. (c) The column mirrored with a sign flip repeats smoothly. (d) Its FFT in $z$ is a pure sine series; the jumps at the plates make the coefficients fall like $1/n$.}\label{fig:mirror}
 \end{figure}
+
+
 
 \subsection{Error bars and validation}
 Frames close in time are correlated, so 95\% intervals come from resampling blocks of frames (a moving-block bootstrap with blocks of four correlation times), or from batch means when a movie holds only a few correlation times. On synthetic movies with a known spectrum, drawn with the same layout, colours and H.264 compression, the 1D method returns slopes within 0.04--0.09 and the 2D method within 0.015; plates come back within 0.03 px.
@@ -95,26 +100,29 @@ Frames close in time are correlated, so 95\% intervals come from resampling bloc
 
 \section{Results}
 \subsection{Temperature spectra}
-Figure~\ref{fig:spec} shows the full 2D spectra; Table~\ref{tab:slopes} lists the slopes from the 1D and 2D transforms. At $\mathrm{Ra}=10^{12}$ both follow the Obukhov--Corrsin value $-5/3$ for a passive-like scalar. At $\mathrm{Ra}=10^{15}$ the spectrum is clearly steeper over the large scales, and at small scales both high-Ra movies approach $-2$, the value expected for sharp temperature fronts. At $\mathrm{Ra}=10^{9}$ the turbulence is weak and the straight range is short. The same modes show that the middle of the box is close to isotropic, $E_z/E_x=1.01$, $1.06$, $1.17$ at $k/\pi=3$--$10$, as found in direct simulations \cite{nath2016}; only the plates make the whole box anisotropic.
+Figure~\ref{fig:spec} shows the full 2D spectra; Table~\ref{tab:slopes} lists the slopes from the 1D and 2D transforms. At $\mathrm{Ra}=10^{12}$ both follow the Obukhov--Corrsin value $-5/3$ for a passive-like scalar. At $\mathrm{Ra}=10^{15}$ the spectrum is clearly steeper over the large scales, and at small scales both high-Ra movies approach $-2$ ($-1.97$ and $-1.92$), the value expected for sharp temperature fronts. At $\mathrm{Ra}=10^{9}$ the turbulence is weak and the straight range is short. The same modes show that the middle of the box is close to isotropic, $E_z/E_x=1.01$, $1.06$, $1.17$ at $k/\pi=3$--$10$, as found in direct simulations \cite{nath2016}; only the plates make the whole box anisotropic.
 
-\begin{figure}[!htbp]
-\centering
-\includegraphics[width=0.72\textwidth]{../figures/report/deck_spec2d.png}
-\caption{Full 2D temperature spectra (FFT in $x$ $\times$ sine series in $z$), summed in rings of $K$. Dashed: slope $-5/3$; grey band: fit range. The 1D spectra along $x$ give the same picture (Table~\ref{tab:slopes}).}\label{fig:spec}
-\end{figure}
-
-\begin{table}[!htbp]\centering\small
-\caption{Slopes of the temperature spectra with 95\% intervals.}\label{tab:slopes}
-\begin{tabular}{@{}lccc@{}}
+\begin{figure}[H]
+\begin{minipage}[c]{0.56\textwidth}\centering
+\includegraphics[width=\textwidth]{../figures/report/deck_spec2d.png}
+\captionof{figure}{Full 2D temperature spectra (FFT in $x$ $\times$ sine series in $z$), summed in rings of $K$. Dashed: slope $-5/3$; grey band: fit range.}\label{fig:spec}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.41\textwidth}\centering\small
+\captionof{table}{Spectral slopes, 95\% intervals.}\label{tab:slopes}
+\begin{tabular}{@{}lcc@{}}
 \toprule
- & \color{blue9}$\mathbf{Ra=10^{9}}$ & \color{org12}$\mathbf{Ra=10^{12}}$ & \color{grn15}$\mathbf{Ra=10^{15}}$\\
+ & 1D, $k$ 10--30 & 2D, $K/\pi$ 5--15\\
 \midrule
-1D, $k=10$--$30$ & $-1.52$ \scriptsize$[-1.65,-1.39]$ & $-1.59$ \scriptsize$[-1.69,-1.45]$ & $-2.35$ \scriptsize$[-2.42,-2.31]$\\
-2D rings, $K/\pi=5$--$15$ & $-1.27$ \scriptsize$[-1.38,-1.16]$ & $-1.62$ \scriptsize$[-2.04,-1.20]$ & $-2.27$ \scriptsize$[-2.34,-2.20]$\\
-Small scales & dissipation & $-1.97$ ($k$ 40--150) & $-1.92$ ($k$ 35--103)\\
+\color{blue9}$\mathbf{10^{9}}$ & $-1.52$ & $-1.27$\\[-1pt]
+ & \scriptsize$[-1.65,-1.39]$ & \scriptsize$[-1.38,-1.16]$\\
+\color{org12}$\mathbf{10^{12}}$ & $-1.59$ & $-1.62$\\[-1pt]
+ & \scriptsize$[-1.69,-1.45]$ & \scriptsize$[-2.04,-1.20]$\\
+\color{grn15}$\mathbf{10^{15}}$ & $-2.35$ & $-2.27$\\[-1pt]
+ & \scriptsize$[-2.42,-2.31]$ & \scriptsize$[-2.34,-2.20]$\\
 \bottomrule
 \end{tabular}
-\end{table}
+\end{minipage}
+\end{figure}
 
 \subsection{Entropy of the spectrum and vortex cores}\label{sec:entropy}
 Treating the normalised spectrum $p_k=E(k)/\sum E$ as a probability distribution, its Shannon entropy $S=-\sum_k p_k\log_2 p_k$ \cite{verma2022} measures how widely the energy is spread over sizes: $S=0$ for a single mode, $S=\log_2 150=7.2$ bits for white noise. $S$ falls at every step in Ra (Fig.~\ref{fig:entropy}a), so the temperature variance sits in fewer, larger structures.
@@ -123,8 +131,8 @@ The density panel explains why. For an ideal gas $p=\rho T$, so the temperature 
 \[ \ln T = \frac{1}{\gamma}\frac{s}{c_v} + \frac{\gamma-1}{\gamma}\ln p . \]
 Cold and heavy fluid is a thermal plume; cold and light fluid is a low-pressure vortex core. The pressure share of the temperature variance rises from 28\% to 77\% to 97\% (Fig.~\ref{fig:entropy}b). Vortex cores have a steep spectrum, which accounts for the steep slope at $10^{15}$. In the 3D movie the share is only 7\%: the long-lived vortices are a two-dimensional effect. The same split gives back the gas constants from the pixels: $\gamma-1=0.291$ and $D=0.475$ at $10^{12}$, $0.294$ and $0.479$ at $10^{15}$, against $0.3$ and $0.5$ printed on the frames.
 
-\begin{figure}[!htbp]
-\centering\includegraphics[width=0.68\textwidth]{../figures/report/deck_entropy.png}
+\begin{figure}[H]
+\centering\includegraphics[width=0.62\textwidth]{../figures/report/deck_entropy.png}
 \caption{(Left) Entropy of the spectrum against Ra, 1D spectra and 2D rings, with 95\% intervals. (Right) Pressure (vortex-core) share of the temperature variance; the 3D movie at $\mathrm{Ra}=10^{8}$ is shown for comparison.}\label{fig:entropy}
 \end{figure}
 
@@ -133,7 +141,7 @@ Averaging $\theta'$ over $x$ and time gives the mean profile $\Theta(z)$, which 
 \[ \hat\Theta_n=\frac{2}{n\pi}\big[J_0-(-1)^nJ_1\big], \qquad E_n=\frac{2}{(n\pi)^2}\big[J_0-(-1)^nJ_1\big]^2 . \]
 With $J_0$ and $J_1$ read directly from the profile, nothing is fitted. The measured mode amplitudes are $0.98$ and $1.00$ of the prediction at $10^{12}$ and $10^{15}$, with slopes $-2.15$ and $-2.09$. At $10^{9}$ the boundary layers are thick enough to resolve and the high modes roll off; the fitted layer thickness (0.010--0.028) agrees in size with jump divided by plate gradient (0.018--0.039). The jumps are $\approx0.25\,\varepsilon$ at the bottom and $\approx0.75\,\varepsilon$ at the top in all three movies, against $0.5$ and $0.5$ for a Boussinesq fluid: a clear signature of compressibility.
 
-\begin{figure}[!htbp]
+\begin{figure}[H]
 \centering\includegraphics[width=0.70\textwidth]{../figures/report/deck_upper.png}
 \caption{(Left) Mean temperature profile at $\mathrm{Ra}=10^{12}$, with the straight middle (dashed) and the two plate jumps. (Right) Energy of each even sine wave of the profile: dots measured, lines predicted from the two jumps with nothing fitted.}\label{fig:upper}
 \end{figure}
@@ -141,14 +149,7 @@ With $J_0$ and $J_1$ read directly from the profile, nothing is fitted. The meas
 \subsection{Sound waves}
 The movies hold 1001 frames, $\Delta t=0.01$ apart, so we can also Fourier transform in time. For every 2D wave $(k_x,n)$ we follow its complex amplitude through all frames and take a windowed FFT. Plotting the power against the size $K$ and the frequency $f$ separates two kinds of motion: slow, broad-band changes from drifting plumes and swirls, and a sharp straight ridge through the origin (Fig.~\ref{fig:sound}). A straight ridge $\omega = 2\pi f = cK$ means waves that all travel at one speed: sound.
 
-\begin{figure}[!htbp]
-\centering\includegraphics[width=0.94\textwidth]{../figures/report/rep_sound_map.png}
-\caption{Sound waves in the $\mathrm{Ra}=10^{15}$ movie. Power against the size of each 2D wave and its frequency (darker = more power, normalised per ring). The slow plumes and swirls fill the bottom; sound waves form the straight ridge. Dots: measured peak frequency of the ridge in each ring; solid: straight line through them ($c=1.93$); dashed: ideal-gas sound speed computed from $\gamma$, $D$ and $\varepsilon$ alone ($c=2.09$, nothing fitted).}\label{fig:sound}
-\end{figure}
 
-\begin{keybox}[colback=accent!7,borderline west={3pt}{0pt}{accent}]
-\textbf{Result.} The measured sound speed is $\mathbf{1.93}$ (temperature) and $\mathbf{2.00}$ (density) at $\mathrm{Ra}=10^{15}$, and $\mathbf{1.93}$ and $\mathbf{2.08}$ at $10^{12}$. The ideal-gas theory, using only the constants printed on the movie, gives $\mathbf{2.09}$. The measurement agrees with the gas law to within 8\%, with no adjustable parameter.
-\end{keybox}
 
 \textbf{Theory with no fit.} Velocities in the simulation are measured in free-fall units $U=\sqrt{g\,d\,\varepsilon}$. For an ideal gas with the adiabatic background $T_A=1-Dz$, the sound speed in these units is
 \[ \frac{c_s(z)}{U} = \sqrt{\frac{(\gamma-1)\,T_A(z)}{D\,\varepsilon}}, \]
@@ -158,7 +159,18 @@ which falls from 2.45 at the hot bottom to 1.73 at the cold top. A wave crossing
 
 \textbf{Measurement.} The peak frequency in each ring gives $\omega(K)$, and a straight-line fit through the origin gives $c$ (Table~\ref{tab:sound}). In both the temperature and the density panels, at both high Rayleigh numbers, the measured speed is $1.93$--$2.08$, within 8\% of the theory. The ridge is slightly below the depth-average line in the temperature panel, as expected if the waves are weighted toward the cooler upper half, where the temperature fluctuations are strongest.
 
-\begin{table}[!htbp]\centering\small
+
+
+\begin{figure}[H]
+\centering\includegraphics[width=0.94\textwidth]{../figures/report/rep_sound_map.png}
+\caption{Sound waves in the $\mathrm{Ra}=10^{15}$ movie. Power against the size of each 2D wave and its frequency (darker = more power, normalised per ring). The slow plumes and swirls fill the bottom; sound waves form the straight ridge. Dots: measured peak frequency of the ridge in each ring; solid: straight line through them ($c=1.93$); dashed: ideal-gas sound speed computed from $\gamma$, $D$ and $\varepsilon$ alone ($c=2.09$, nothing fitted).}\label{fig:sound}
+\end{figure}
+
+\begin{keybox}[colback=accent!7,borderline west={3pt}{0pt}{accent}]
+\textbf{Result.} The measured sound speed is $\mathbf{1.93}$ (temperature) and $\mathbf{2.00}$ (density) at $\mathrm{Ra}=10^{15}$, and $\mathbf{1.93}$ and $\mathbf{2.08}$ at $10^{12}$. The ideal-gas theory, using only the constants printed on the movie, gives $\mathbf{2.09}$. The measurement agrees with the gas law to within 8\%, with no adjustable parameter.
+\end{keybox}
+
+\begin{table}[H]\centering\small
 \caption{Sound waves from the frequency--wavenumber spectrum. Speed from a line fit to the ridge peaks ($K/\pi=4$--$60$); share = fraction of the variance on the ridge at $K/\pi=10$--$30$.}\label{tab:sound}
 \begin{tabular}{@{}lccc@{}}
 \toprule
